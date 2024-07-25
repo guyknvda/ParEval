@@ -1,4 +1,4 @@
-# ParEval
+# ParEval - gk_main branch
 
 [![HPDC 2024](https://img.shields.io/badge/Paper-HPDC'24-e87053.svg?style=flat)](https://pssg.cs.umd.edu/assets/papers/2024-06-pareval-hpdc.pdf)&nbsp;[![arXiv](https://img.shields.io/badge/arXiv-2401.12554-b31b1b.svg)](https://arxiv.org/abs/2401.12554)&nbsp;[![GitHub license](https://badgen.net/github/license/parallelcodefoundry/ParEval)](https://github.com/parallelcodefoundry/ParEval/blob/develop/LICENSE)
 
@@ -25,40 +25,8 @@ workflow is to use `generate/generate.py` to generate LLM outputs, run
 post-process the results.
 
 ## Setup and Installation
-
-A couple core systems software are assumed to be installed: Python >=3.7, a C++
-compiler that supports C++17 and OpenMP, Make, CMake, and an MPI implementation.
-If you are testing the CUDA and HIP prompts, then you will need access to NVIDIA
-and AMD GPUs alongside their respective software stacks.
-
-First, clone the repo.
-
-```sh
-git clone --recurse-submodules https://github.com/parallelcodefoundry/ParEval.git
-```
-
-Next, you need to build Kokkos (if you want to include it in testing).
-
-```sh
-cd tpl/kokkos
-
-mkdir build
-cd build
-
-# depending on your system you may need to pass your c++ compiler to CMAKE_CXX_COMPILER
-cmake .. -DCMAKE_INSTALL_PREFIX=. -DKokkos_ENABLE_THREADS=ON
-make install -j4
-```
-
-Finally, you need to install the Python dependencies. `requirements.txt` has
-the set of dependencies pinned at the version they were tested with. Other
-versions may also work. Note that some of these are only required for parts of
-the pipeline i.e. PyTorch and Transformers are only needed for generating LLM
-outputs.
-
-```sh
-pip install -r requirements.txt
-```
+UPDATE for gk_main:  
+we'll be running the code from within a docker container. see `env_scripts` folder for relevant scripts
 
 ## Citing ParEval
 
