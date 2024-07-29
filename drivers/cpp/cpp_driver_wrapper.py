@@ -14,7 +14,9 @@ import tempfile
 from typing import List
 
 # local imports
-sys.path.append("..")
+# sys.path.append("..")
+project_root=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(project_root)
 from drivers.driver_wrapper import DriverWrapper, BuildOutput, RunOutput, GeneratedTextResult
 from util import run_command
 
