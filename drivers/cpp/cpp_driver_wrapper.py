@@ -61,7 +61,7 @@ class CppDriverWrapper(DriverWrapper):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.model_driver_file = os.path.join("cpp", "models", DRIVER_MAP[self.parallelism_model])
+        self.model_driver_file = os.path.join(project_root,"drivers","cpp", "models", DRIVER_MAP[self.parallelism_model])
 
     def write_source(self, content: str, fpath: PathLike) -> bool:
         """ Write the given c++ source to the given file. """
@@ -128,7 +128,7 @@ class CppDriverWrapper(DriverWrapper):
             exec_path = os.path.join(tmpdir, "a.out")
             compiler_kwargs = copy.deepcopy(COMPILER_SETTINGS[self.parallelism_model])
             compiler_kwargs["problem_size"] = problem_size  # for kokkos
-            compiler_kwargs["CXXFLAGS"] += f" -I{tmpdir} -DDRIVER_PROBLEM_SIZE=\"{problem_size}\""
+            compiler_kwargs["CXXFLAGS"] += f" -I{tmpdir} -I{os.path.dirname(__file__)} -DDRIVER_PROBLEM_SIZE=\"{problem_size}\""
             build_result = self.compile(self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
             logging.debug(f"Build result: {build_result}")
             if self.display_build_errors and build_result.stderr and not build_result.did_build:

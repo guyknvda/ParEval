@@ -13,7 +13,6 @@ from typing import List, Optional, Tuple
 from util import all_equal, mean
 from cpp.parallel_validation import Validator, OMPValidator, MPIValidator, MPIandOMPValidator, EmptyValidator
 
-
 class BuildOutput:
     """ Represents the output of a single build. """
     exit_code: int
@@ -221,7 +220,7 @@ class DriverWrapper(ABC):
             ext = ".cu"
         driver_root = f"{name}"
         driver_base = DRIVER_MAP[self.parallelism_model]
-        test_driver_file = os.path.join(root, "benchmarks", type, driver_root, driver_base + ext)
+        test_driver_file = os.path.join(os.path.dirname(__file__),root, "benchmarks", type, driver_root, driver_base + ext)
         problem_size = self.problem_sizes.get(name, {}).get(self.parallelism_model, "(1<<18)")
 
         outputs = []
